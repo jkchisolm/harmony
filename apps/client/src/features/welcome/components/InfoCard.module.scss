@@ -1,0 +1,43 @@
+.infoCard {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  padding: 10rem;
+
+  &.left {
+    flex-direction: row-reverse;
+  }
+  &.right {
+    flex-direction: row;
+  }
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column !important;
+    padding: 5rem;
+  }
+
+  > * {
+    margin: 3rem;
+    flex: 1 1 0px;
+    text-align: center;
+  }
+
+  h3 {
+    font-size: 2.5rem;
+    font-weight: 900;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    font-size: 1.5rem;
+  }
+}
+
+.white {
+  background-color: white;
+}
+
+.darker {
+  background-color: #f1f1f1;
+}
