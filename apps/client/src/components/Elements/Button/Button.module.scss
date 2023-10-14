@@ -2,19 +2,29 @@
 
 button {
   padding: 1rem 2rem;
-  border-radius: 28px;
+  border-radius: 5px;
   border: none;
   font-size: 20px;
   font-weight: 500;
   font-family: 'Work Sans', sans-serif;
+  width: 100%;
 }
 
 .primary {
-  background-color: $discord-gray;
+  background-color: $discord-dark-gray;
   color: white;
 }
 
 .secondary {
   background-color: white;
-  color: $discord-gray;
+  color: $discord-dark-gray;
+}
+
+.color {
+  background-color: $discord-purple;
+  color: white;
+}
+
+.rounded {
+  border-radius: 28px;
 }

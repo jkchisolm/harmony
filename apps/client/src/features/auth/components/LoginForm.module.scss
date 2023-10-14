@@ -1,0 +1,27 @@
+@use '../../../styles.scss' as *;
+
+.loginForm {
+  background-color: $discord-medium-gray;
+  color: white;
+  width: 40vw;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+  }
+  h2 {
+    font-size: 1rem;
+    color: #aaa;
+    font-weight: 400;
+  }
+
+  div {
+    width: 100%;
+    margin-top: 1rem;
+  }
+}

@@ -15,8 +15,16 @@ export const WelcomePage = () => {
           every day and hang out more often.
         </p>
         <div className={styles.buttonRow}>
-          <Button text="Open Harmony in your browser" variant="primary" />
-          <Button text="Enter Guest Mode" variant="secondary" />
+          <a href="/login">
+            <Button
+              text="Open Harmony in your browser"
+              variant="primary"
+              rounded
+            />
+          </a>
+          <a href="/guest">
+            <Button text="Enter Guest Mode" variant="secondary" rounded />
+          </a>
         </div>
       </div>
       <InfoCard
@@ -45,7 +53,7 @@ export const WelcomePage = () => {
       />
       <div style={{ margin: '2rem 0' }}>
         <h2 style={{ textAlign: 'center' }}>Ready to start your journey?</h2>
-        <Button text="Open Harmony in your browser" variant="primary" />
+        <Button text="Open Harmony in your browser" variant="primary" rounded />
       </div>
     </div>
   );
