@@ -62,6 +62,7 @@ export const RegistrationForm = () => {
           name="password"
           registerOptions={{ required: true }}
           label="Password"
+          type="password"
           required
         />
       </div>
