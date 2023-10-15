@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { Button, Input } from '../../../components';
-import styles from './LoginForm.module.scss';
+import styles from './AuthForm.module.scss';
 
 const schema = z.object({
   email: z.string().email('Please enter a valid email address.'),
@@ -19,7 +19,7 @@ export const LoginForm = () => {
   return (
     <form
       onSubmit={handleSubmit((d) => console.log(d))}
-      className={styles.loginForm}
+      className={styles.authForm}
     >
       <h1>Welcome back!</h1>
       <h2>We're so excited to see you again!</h2>

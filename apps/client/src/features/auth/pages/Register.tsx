@@ -1,3 +1,9 @@
+import { RegistrationForm } from '../components/';
+
 export const Register = () => {
-  return <div>Register</div>;
+  return (
+    <div>
+      <RegistrationForm />
+    </div>
+  );
 };

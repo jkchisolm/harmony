@@ -1,6 +1,6 @@
 @use '../../../styles.scss' as *;
 
-.loginForm {
+.authForm {
   background-color: $discord-medium-gray;
   color: white;
   width: 40vw;
@@ -23,5 +23,21 @@
   div {
     width: 100%;
     margin-top: 1rem;
+  }
+}
+
+.birthdate {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-top: 0rem !important;
+
+  #month {
+    margin-right: 1rem;
+  }
+
+  #year {
+    margin-left: 1rem;
   }
 }
