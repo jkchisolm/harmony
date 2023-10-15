@@ -16,6 +16,7 @@ model User {
   username String @unique
   displayName String
   password String 
+  birthdate DateTime
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   servers Server[]
