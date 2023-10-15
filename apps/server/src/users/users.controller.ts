@@ -27,9 +27,9 @@ export class UsersController {
   async registerUser() {
     // For now just create dummy user, eventually take input
     const user = await this.userService.createUser({
-      email: 'john@doe.com',
-      displayName: 'johnDoe',
-      username: 'johnDoe',
+      email: 'john2@doe.com',
+      displayName: 'johnDoe2',
+      username: 'johnDoe2',
       password: 'johnDoe',
       birthdate: new Date(),
     });
