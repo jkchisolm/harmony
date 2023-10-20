@@ -18,12 +18,4 @@ export class UsersService {
   async users(): Promise<User[]> {
     return this.prisma.user.findMany();
   }
-
-  async createUser(data: Prisma.UserCreateInput): Promise<User> {
-    const saltOrRounds = 10;
-    data.password = bcrypt.hashSync(data.password, saltOrRounds);
-    return this.prisma.user.create({
-      data,
-    });
-  }
 }
