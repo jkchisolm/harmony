@@ -36,7 +36,7 @@ export const LoginForm = () => {
     mutationFn: (data: FieldValues) => {
       return handleUserLogin(data.email, data.password);
     },
-    onSuccess: async (data) => {
+    onSuccess: async () => {
       // Redirect to channels page
       window.location.href = '/channels/@me';
     },

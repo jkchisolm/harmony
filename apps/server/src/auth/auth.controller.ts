@@ -1,4 +1,12 @@
-import { Body, Controller, Post, Get, Res } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Post,
+  Get,
+  Res,
+  UseGuards,
+  Request,
+} from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { Prisma, User } from '@prisma/client';
 import { LoginResponseDto } from './dto/login-response.dto';
@@ -7,10 +15,24 @@ import { ApiBody, ApiResponse } from '@nestjs/swagger';
 import { Response } from 'express';
 import { RegisterInfoDto } from './dto/register-info.dto';
 import { RegisterResponseDto } from './dto/register-response.dto';
+import { AuthGuard } from './auth.guard';
 
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
+
+  @UseGuards(AuthGuard)
+  @Get('me')
+  @ApiResponse({
+    status: 200,
+  })
+  @ApiResponse({
+    status: 401,
+    description: 'Unauthorized',
+  })
+  async getMe(@Request() req): Promise<User> {
+    return req.user;
+  }
 
   @Post('register')
   @ApiBody({
