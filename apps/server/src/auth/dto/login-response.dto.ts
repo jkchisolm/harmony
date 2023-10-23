@@ -6,10 +6,9 @@ export class LoginResponseDto {
 
   @ApiProperty()
   username: string;
+}
 
-  @ApiProperty()
+export class LoginServiceResponseDto extends LoginResponseDto {
   accessToken: string;
-
-  @ApiProperty()
   refreshToken: string;
 }

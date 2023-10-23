@@ -3,7 +3,10 @@ import { PrismaService } from '../prisma.service';
 import { User, Prisma } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
-import { LoginResponseDto } from './dto/login-response.dto';
+import {
+  LoginResponseDto,
+  LoginServiceResponseDto,
+} from './dto/login-response.dto';
 import { LoginInfoDto } from './dto/login-info.dto';
 
 @Injectable()
@@ -21,7 +24,7 @@ export class AuthService {
     });
   }
 
-  async login(data: LoginInfoDto): Promise<LoginResponseDto | null> {
+  async login(data: LoginInfoDto): Promise<LoginServiceResponseDto | null> {
     const results = await this.prisma.user.findMany({
       where: {
         OR: [

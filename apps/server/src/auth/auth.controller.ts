@@ -1,9 +1,10 @@
-import { Body, Controller, Post, Get } from '@nestjs/common';
+import { Body, Controller, Post, Get, Res } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { Prisma, User } from '@prisma/client';
 import { LoginResponseDto } from './dto/login-response.dto';
 import { LoginInfoDto } from './dto/login-info.dto';
 import { ApiResponse } from '@nestjs/swagger';
+import { Response } from 'express';
 
 @Controller('auth')
 export class AuthController {
@@ -29,7 +30,21 @@ export class AuthController {
     status: 404,
     description: 'User not found',
   })
-  async loginUser(@Body() userInfo: LoginInfoDto): Promise<LoginResponseDto> {
-    return this.authService.login(userInfo);
+  async loginUser(
+    @Body() userInfo: LoginInfoDto,
+    @Res({ passthrough: true }) response: Response
+  ): Promise<LoginResponseDto> {
+    const data = await this.authService.login(userInfo);
+    response.cookie('accessToken', data.accessToken, {
+      httpOnly: true,
+      secure: true,
+      sameSite: 'none',
+    });
+    response.cookie('refreshToken', data.refreshToken, {
+      httpOnly: true,
+      secure: true,
+      sameSite: 'none',
+    });
+    return { displayName: data.displayName, username: data.username };
   }
 }
