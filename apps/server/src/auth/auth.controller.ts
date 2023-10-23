@@ -48,7 +48,11 @@ export class AuthController {
       sameSite: 'none',
     });
 
-    return { displayName: data.displayName, username: data.username };
+    return {
+      id: data.id,
+      displayName: data.displayName,
+      username: data.username,
+    };
   }
 
   @Post('login')
@@ -79,6 +83,10 @@ export class AuthController {
       secure: true,
       sameSite: 'none',
     });
-    return { displayName: data.displayName, username: data.username };
+    return {
+      id: data.id,
+      displayName: data.displayName,
+      username: data.username,
+    };
   }
 }

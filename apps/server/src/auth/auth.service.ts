@@ -4,15 +4,12 @@ import {
   Injectable,
   UnauthorizedException,
 } from '@nestjs/common';
-import { PrismaService } from '../prisma.service';
-import { User, Prisma } from '@prisma/client';
-import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
-import {
-  LoginResponseDto,
-  LoginServiceResponseDto,
-} from './dto/login-response.dto';
+import { Prisma, User } from '@prisma/client';
+import * as bcrypt from 'bcrypt';
+import { PrismaService } from '../prisma.service';
 import { LoginInfoDto } from './dto/login-info.dto';
+import { LoginServiceResponseDto } from './dto/login-response.dto';
 import { RegisterInfoDto } from './dto/register-info.dto';
 import { RegisterServiceResponseDto } from './dto/register-response.dto';
 
@@ -67,6 +64,7 @@ export class AuthService {
       const { accessToken, refreshToken } = await this.generateTokens(result);
 
       return {
+        id: result.id,
         displayName: result.displayName,
         username: result.username,
         accessToken,
@@ -114,6 +112,7 @@ export class AuthService {
     const { accessToken, refreshToken } = await this.generateTokens(user);
 
     return {
+      id: user.id,
       displayName: user.displayName,
       username: user.username,
       accessToken,
