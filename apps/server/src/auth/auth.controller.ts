@@ -51,7 +51,7 @@ export class AuthController {
     return { displayName: data.displayName, username: data.username };
   }
 
-  @Get('login')
+  @Post('login')
   @ApiResponse({
     type: LoginResponseDto,
     status: 200,
