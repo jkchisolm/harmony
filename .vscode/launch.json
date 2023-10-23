@@ -2,6 +2,13 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "Attach to Chrome",
+      "port": 4200,
+      "request": "attach",
+      "type": "chrome",
+      "webRoot": "${workspaceFolder}/apps/client"
+    },
+    {
       "name": "Launch my-nest-project",
       "request": "launch",
       "type": "node",

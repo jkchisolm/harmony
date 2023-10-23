@@ -1,5 +1,6 @@
-import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useMutation } from '@tanstack/react-query';
+import { FieldValues, FormProvider, useForm } from 'react-hook-form';
 import * as z from 'zod';
 import { Button, Input } from '../../../components';
 import styles from './AuthForm.module.scss';
@@ -9,39 +10,65 @@ const schema = z.object({
   password: z.string().min(8),
 });
 
+const handleUserLogin = async (
+  email: string,
+  password: string
+): Promise<{ displayName: string; username: string }> => {
+  const response = await fetch('http://localhost:3000/api/auth/login', {
+    method: 'POST',
+    body: JSON.stringify({ email, password }),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    credentials: 'include',
+  });
+
+  return response.json();
+};
+
 export const LoginForm = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({ resolver: zodResolver(schema) });
+  const methods = useForm({
+    resolver: zodResolver(schema),
+    defaultValues: { email: '', password: '' },
+  });
+
+  const { mutateAsync: loginUser } = useMutation({
+    mutationFn: (data: FieldValues) => {
+      return handleUserLogin(data.email, data.password);
+    },
+    onSuccess: async (data) => {
+      // Redirect to channels page
+      window.location.href = '/channels/@me';
+    },
+  });
+
+  const handleFormSubmit = async (data: FieldValues) => {
+    await loginUser(data);
+  };
 
   return (
-    <form
-      onSubmit={handleSubmit((d) => console.log(d))}
-      className={styles.authForm}
-    >
-      <h1>Welcome back!</h1>
-      <h2>We're so excited to see you again!</h2>
-      <div>
-        <Input
-          register={register}
-          name={'email'}
-          registerOptions={{}}
-          label="Email"
-        />
-      </div>
-      <div>
-        <Input
-          register={register}
-          name="password"
-          registerOptions={{}}
-          label="Password"
-        />
-      </div>
-      <div>
-        <Button text="Login" variant="color" />
-      </div>
-    </form>
+    <FormProvider {...methods}>
+      <form
+        onSubmit={methods.handleSubmit(handleFormSubmit)}
+        className={styles.authForm}
+      >
+        <h1>Welcome back!</h1>
+        <h2>We're so excited to see you again!</h2>
+        <div>
+          <Input name={'email'} registerOptions={{}} label="Email" />
+        </div>
+        <div>
+          <Input
+            name="password"
+            registerOptions={{}}
+            label="Password"
+            type="password"
+          />
+        </div>
+        <div>
+          <Button text="Login" variant="color" />
+        </div>
+      </form>
+    </FormProvider>
   );
 };

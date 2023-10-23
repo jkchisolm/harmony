@@ -1,10 +1,9 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { PublicRoutes } from './public';
+import { ProtectedRoutes } from './protected';
 
 export const AppRoutes = () => {
-  const authenticated = false; // Eventually this will be a call to a hook that checks if the user is authenticated
-
-  const routes = authenticated ? [] : PublicRoutes;
+  const routes = ProtectedRoutes.concat(PublicRoutes);
 
   const router = createBrowserRouter(routes);
 
