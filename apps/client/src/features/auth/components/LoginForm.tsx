@@ -10,34 +10,41 @@ const schema = z.object({
   password: z.string().min(8),
 });
 
-const handleUserLogin = async (
-  email: string,
-  password: string
-): Promise<{ displayName: string; username: string }> => {
-  const response = await fetch('http://localhost:3000/api/auth/login', {
-    method: 'POST',
-    body: JSON.stringify({ email, password }),
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    credentials: 'include',
-  });
-
-  return response.json();
-};
-
 export const LoginForm = () => {
   const methods = useForm({
     resolver: zodResolver(schema),
     defaultValues: { email: '', password: '' },
   });
 
+  const handleUserLogin = async (
+    email: string,
+    password: string
+  ): Promise<{ displayName: string; username: string }> => {
+    const response = await fetch('http://localhost:3000/api/auth/login', {
+      method: 'POST',
+      body: JSON.stringify({ email, password }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+    });
+
+    if (response.status === 401) {
+      methods.setError('password', { message: 'Incorrect password.' });
+    } else if (response.status === 404) {
+      methods.setError('email', {
+        message: 'There is no user with that email.',
+      });
+    }
+
+    return response.json();
+  };
+
   const { mutateAsync: loginUser } = useMutation({
     mutationFn: (data: FieldValues) => {
       return handleUserLogin(data.email, data.password);
     },
     onSuccess: async () => {
-      // Redirect to channels page
       window.location.href = '/channels/@me';
     },
   });

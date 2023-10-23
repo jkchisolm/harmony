@@ -1,9 +1,8 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import { PublicRoutes } from './public';
-import { ProtectedRoutes } from './protected';
+import { AppRouteObject } from './routes';
 
 export const AppRoutes = () => {
-  const routes = ProtectedRoutes.concat(PublicRoutes);
+  const routes = AppRouteObject;
 
   const router = createBrowserRouter(routes);
 

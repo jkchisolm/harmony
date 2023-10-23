@@ -1,9 +1,4 @@
-import {
-  FieldValues,
-  RegisterOptions,
-  UseFormRegister,
-  useFormContext,
-} from 'react-hook-form';
+import { FieldError, RegisterOptions, useFormContext } from 'react-hook-form';
 import styles from './Input.module.scss';
 
 type Props = {
@@ -13,10 +8,14 @@ type Props = {
   type?: string;
   placeholder?: string;
   required?: boolean;
+  error?: FieldError;
 };
 
 export const Input = (props: Props) => {
-  const { register } = useFormContext();
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext();
 
   return (
     <div className={styles.container}>
@@ -27,6 +26,10 @@ export const Input = (props: Props) => {
         </label>
       )}
       <input {...register(props.name, props.registerOptions)} {...props} />
+      <div className={styles.error}>
+        &nbsp;
+        {errors[props.name] ? errors[props.name]?.message?.toString() : ''}
+      </div>
     </div>
   );
 };

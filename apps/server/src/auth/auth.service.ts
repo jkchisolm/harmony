@@ -2,6 +2,7 @@ import {
   BadRequestException,
   ConflictException,
   Injectable,
+  NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
@@ -100,7 +101,7 @@ export class AuthService {
     });
 
     if (results.length === 0) {
-      throw new UnauthorizedException('User not found.');
+      throw new NotFoundException('User not found.');
     }
 
     const user = results[0];
