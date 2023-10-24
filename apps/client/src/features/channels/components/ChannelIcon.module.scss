@@ -1,5 +1,9 @@
 @use '../../../styles.scss' as *;
 
+.container {
+  position: relative;
+}
+
 .channelIcon {
   position: relative;
   display: flex;
@@ -42,4 +46,14 @@
   transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
+}
+
+#messagesIconBorder {
+  // half border along the bottom
+  position: absolute;
+  bottom: 0;
+  width: 75%;
+  height: 50%;
+  left: 12.5%;
+  border-bottom: 2px solid $app-light-bg;
 }

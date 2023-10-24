@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import styles from './AppLayout.module.scss';
 import { ChannelIcon } from '../';
+import { MessagesIcon } from '../MessagesIcon';
 
 type Props = {
   children: React.ReactNode;
@@ -69,6 +70,7 @@ export const AppLayout = ({ children }: Props) => {
     <div className={styles.container}>
       <nav className={styles.navbar}>
         <div className={styles.channelList}>
+          <MessagesIcon />
           {dummyChannels.map((channel) => {
             return (
               <ChannelIcon
