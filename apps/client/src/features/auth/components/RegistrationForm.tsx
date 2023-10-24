@@ -1,17 +1,11 @@
-import {
-  FormProvider,
-  useForm,
-  Controller,
-  FieldValues,
-} from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { FieldValues, FormProvider, useForm } from 'react-hook-form';
 import * as z from 'zod';
-import { Button, Input, Select } from '../../../components';
+import { Button, Input } from '../../../components';
 import styles from './AuthForm.module.scss';
-import DatePicker from 'react-datepicker';
 
-import 'react-datepicker/dist/react-datepicker.css';
 import { useMutation } from '@tanstack/react-query';
+import 'react-datepicker/dist/react-datepicker.css';
 
 const schema = z
   .object({

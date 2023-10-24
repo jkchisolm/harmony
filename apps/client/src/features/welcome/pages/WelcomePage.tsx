@@ -1,8 +1,13 @@
+import { useEffect } from 'react';
 import { Button } from '../../../components';
 import { InfoCard } from '../components/InfoCard';
 import styles from './WelcomePage.module.scss';
 
 export const WelcomePage = () => {
+  useEffect(() => {
+    document.body.style.overflow = 'auto';
+  });
+
   return (
     <div className={styles.container}>
       <div className={styles.heroSection}>

@@ -21,18 +21,18 @@ const fetchCurrentUser = async () => {
 };
 
 export const AuthGuard = ({ children }: Props) => {
-  const { data, isLoading, isError, error } = useQuery({
-    queryKey: ['me'],
-    queryFn: fetchCurrentUser,
-  });
+  // const { data, isLoading, isError, error } = useQuery({
+  //   queryKey: ['me'],
+  //   queryFn: fetchCurrentUser,
+  // });
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
+  // if (isLoading) {
+  //   return <div>Loading...</div>;
+  // }
 
-  if (isError) {
-    window.location.href = '/login';
-  }
+  // if (isError) {
+  //   window.location.href = '/login';
+  // }
 
   return <>{children}</>;
 };
