@@ -1,8 +1,7 @@
-import { UseFormRegister, FieldValues, RegisterOptions } from 'react-hook-form';
+import { RegisterOptions, useFormContext } from 'react-hook-form';
 import styles from './Select.module.scss';
 
 type Props = {
-  register: UseFormRegister<FieldValues>;
   registerOptions?: RegisterOptions;
   name: string;
   label?: string;
@@ -13,6 +12,10 @@ type Props = {
 };
 
 export const Select = (props: Props) => {
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext();
   return (
     <div className={styles.container}>
       {props.label && (
@@ -21,13 +24,17 @@ export const Select = (props: Props) => {
           {props.required ? <span style={{ color: 'red' }}>*</span> : ''}
         </label>
       )}
-      <select {...props.register(props.name, props.registerOptions)} {...props}>
+      <select {...register(props.name, props.registerOptions)} {...props}>
         {props.options.map((option) => (
           <option key={option} value={option}>
             {option}
           </option>
         ))}
       </select>
+      <div className={styles.error}>
+        &nbsp;
+        {errors[props.name] ? errors[props.name]?.message?.toString() : ''}
+      </div>
     </div>
   );
 };

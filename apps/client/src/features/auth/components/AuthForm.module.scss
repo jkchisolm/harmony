@@ -22,22 +22,16 @@
 
   div {
     width: 100%;
-    margin-top: 1rem;
+    margin-top: 0.25rem;
   }
 }
 
-.birthdate {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: flex-end;
-  margin-top: 0rem !important;
+.authFormFooter {
+  margin-top: 1rem;
+  color: ligthgray;
 
-  #month {
-    margin-right: 1rem;
-  }
-
-  #year {
-    margin-left: 1rem;
+  a {
+    text-decoration: none;
+    color: rgb(0, 80, 218);
   }
 }

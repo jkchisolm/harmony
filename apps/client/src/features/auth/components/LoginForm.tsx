@@ -75,6 +75,10 @@ export const LoginForm = () => {
         <div>
           <Button text="Login" variant="color" />
         </div>
+        <span className={styles.authFormFooter}>
+          Don't have an account?{' '}
+          <a href="/register">Click here to create one.</a>
+        </span>
       </form>
     </FormProvider>
   );

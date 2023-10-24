@@ -1,11 +1,12 @@
 import { FieldError, RegisterOptions, useFormContext } from 'react-hook-form';
 import styles from './Input.module.scss';
+import { HTMLInputTypeAttribute } from 'react';
 
 type Props = {
   registerOptions?: RegisterOptions;
   name: string;
   label?: string;
-  type?: string;
+  type?: HTMLInputTypeAttribute;
   placeholder?: string;
   required?: boolean;
   error?: FieldError;
