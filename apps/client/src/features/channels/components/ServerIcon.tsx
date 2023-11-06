@@ -1,11 +1,14 @@
-import styles from './ChannelIcon.module.scss';
+import styles from './ServerIcon.module.scss';
 
 type Props = {
-  channelName: string;
-  channelIcon?: string;
+  serverName: string;
+  serverIcon?: string;
 };
 
-export const ChannelIcon = ({ channelName, channelIcon }: Props) => {
+export const ServerIcon = ({
+  serverName: channelName,
+  serverIcon: channelIcon,
+}: Props) => {
   return (
     <div className={styles.channelIcon}>
       {channelIcon}

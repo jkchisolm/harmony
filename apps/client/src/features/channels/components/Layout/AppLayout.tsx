@@ -1,7 +1,9 @@
 import { useEffect } from 'react';
 import styles from './AppLayout.module.scss';
-import { ChannelIcon } from '../';
+import { ServerIcon } from '../';
 import { MessagesIcon } from '../MessagesIcon';
+import { useLocation } from 'react-router-dom';
+import { DMList } from '../DMList';
 
 type Props = {
   children: React.ReactNode;
@@ -66,23 +68,33 @@ export const AppLayout = ({ children }: Props) => {
     document.body.style.overflow = 'hidden';
   });
 
+  const location = useLocation();
+
   return (
     <div className={styles.container}>
       <nav className={styles.navbar}>
-        <div className={styles.channelList}>
+        <div className={styles.serverList}>
           <MessagesIcon />
           {dummyChannels.map((channel) => {
             return (
-              <ChannelIcon
-                channelName={channel.name}
-                channelIcon={channel.name[0]}
+              <ServerIcon
+                serverName={channel.name}
+                serverIcon={channel.name[0]}
               />
             );
           })}
         </div>
       </nav>
-      MainLayout
-      {children}
+      <div className={styles.content}>
+        <div className={styles.channelList}>
+          {location.pathname.startsWith('/channels/@me') ? (
+            <DMList />
+          ) : (
+            <div>channels</div>
+          )}
+        </div>
+        {children}
+      </div>
     </div>
   );
 };

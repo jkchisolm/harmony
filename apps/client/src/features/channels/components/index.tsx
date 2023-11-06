@@ -1,2 +1,2 @@
 export * from './Layout';
-export * from './ChannelIcon';
+export * from './ServerIcon';

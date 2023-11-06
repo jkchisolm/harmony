@@ -13,6 +13,14 @@
   overflow: hidden;
 }
 
+.content {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: stretch;
+  height: 100%;
+}
+
 .navbar {
   min-width: 72px;
   width: 72px;
@@ -23,12 +31,23 @@
   justify-content: start;
 }
 
-.channelList {
+.serverList {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   margin-top: 1rem;
+}
+
+.channelList {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  width: 240px;
+  background-color: $app-medium-bg;
+  height: 100%;
+  min-height: 100vh;
 }
 
 .noscroll {
