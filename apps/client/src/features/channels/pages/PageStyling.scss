@@ -1,0 +1,19 @@
+// General styling for all pages in the app
+
+@use '../../../styles.scss' as *;
+
+@mixin page-header {
+  @include app-header;
+  background-color: $app-light-bg;
+  width: 100%;
+}
+
+@mixin page-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  width: 100%;
+  height: 100%;
+  background-color: $app-light-bg;
+}

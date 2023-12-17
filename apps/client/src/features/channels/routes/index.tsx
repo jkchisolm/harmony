@@ -1,5 +1,6 @@
 import { Outlet, RouteObject } from 'react-router-dom';
 import { AppLayout } from '../components';
+import { MePage } from '../pages';
 
 export const ChannelRoutes: RouteObject[] = [
   {
@@ -9,6 +10,6 @@ export const ChannelRoutes: RouteObject[] = [
         <Outlet />
       </AppLayout>
     ),
-    children: [{ path: '@me', element: <div>Home</div> }],
+    children: [{ path: '@me', element: <MePage /> }],
   },
 ];
