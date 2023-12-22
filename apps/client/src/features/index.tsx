@@ -1,3 +1,3 @@
 export * from './welcome';
 export * from './auth';
-export * from './channels';
+export * from './app';

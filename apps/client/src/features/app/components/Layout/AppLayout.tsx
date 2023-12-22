@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import styles from './AppLayout.module.scss';
-import { ServerIcon } from '../';
+import { ServerIcon } from '..';
 import { MessagesIcon } from '../MessagesIcon';
 import { useLocation } from 'react-router-dom';
 import { DMList } from '../DMList';
