@@ -1,2 +1,2 @@
 export * from './Layout';
-export * from './ServerIcon';
+export * from './Elements';

@@ -1,4 +1,4 @@
-@use '../../../styles.scss' as *;
+@use '../../../../styles.scss' as *;
 
 .container {
   position: relative;
@@ -56,4 +56,15 @@
   height: 50%;
   left: 12.5%;
   border-bottom: 2px solid $app-light-bg;
+}
+
+.createChannelIcon {
+  @extend .channelIcon;
+
+  color: $app-green;
+
+  &:hover {
+    background-color: $app-green;
+    color: white;
+  }
 }
