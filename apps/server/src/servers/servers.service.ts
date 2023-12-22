@@ -47,6 +47,7 @@ export class ServersService {
 
   findAllForUser(id: number): Promise<GetUserServersDto[]> {
     // gets all servers for user with specific id
+    console.log(id);
     return this.prisma.user.findUnique({ where: { id } }).servers();
   }
 
@@ -68,14 +69,6 @@ export class ServersService {
     } catch (error) {
       return false;
     }
-    // return this.prisma.server.update({
-    //   where: { id: serverId },
-    //   data: {
-    //     users: {
-    //       connect: { id: userId },
-    //     },
-    //   },
-    // });
   }
 
   update(id: number, updateServerDto: UpdateServerDto) {

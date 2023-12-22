@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { User } from './User';
+import { User } from './User.entity';
 
 export class Server {
   // id Int @default(autoincrement()) @id

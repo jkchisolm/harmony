@@ -18,7 +18,7 @@ async function bootstrap() {
   const config = new DocumentBuilder()
     .setTitle('Harmony')
     .setDescription('The Harmony API Description')
-    .setVersion('0.1')
+    .setVersion('0.11')
     .setBasePath('api')
     .build();
   const document = SwaggerModule.createDocument(app, config, {

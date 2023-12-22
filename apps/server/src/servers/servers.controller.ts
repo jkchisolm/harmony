@@ -13,11 +13,12 @@ import {
 import { ServersService } from './servers.service';
 import { CreateServerDto } from './dto/create-server.dto';
 import { UpdateServerDto } from './dto/update-server.dto';
-import { ApiBody, ApiResponse } from '@nestjs/swagger';
+import { ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { GetUserServersDto } from './dto/get-user-server.dto';
 import { GetServerDto } from './dto/get-server.dto';
 import { AuthGuard } from '../auth/auth.guard';
 
+@ApiTags('Servers')
 @Controller('servers')
 export class ServersController {
   constructor(private readonly serversService: ServersService) {}
@@ -42,24 +43,6 @@ export class ServersController {
   @Get()
   async findAll() {
     return await this.serversService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.serversService.findOne(+id);
-  }
-
-  /**
-   * Get all servers for a user
-   * @param id
-   * @returns GetServerDto[]
-   */
-  @Get('user/:id')
-  @ApiResponse({
-    type: [GetUserServersDto],
-  })
-  findAllForUser(@Param('id') id: string): Promise<GetUserServersDto[]> {
-    return this.serversService.findAllForUser(+id);
   }
 
   // Join a server

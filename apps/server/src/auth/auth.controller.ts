@@ -11,28 +11,16 @@ import { AuthService } from './auth.service';
 import { Prisma, User } from '@prisma/client';
 import { LoginResponseDto } from './dto/login-response.dto';
 import { LoginInfoDto } from './dto/login-info.dto';
-import { ApiBody, ApiResponse } from '@nestjs/swagger';
+import { ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Response } from 'express';
 import { RegisterInfoDto } from './dto/register-info.dto';
 import { RegisterResponseDto } from './dto/register-response.dto';
 import { AuthGuard } from './auth.guard';
 
+@ApiTags('Authentication')
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
-
-  @UseGuards(AuthGuard)
-  @Get('me')
-  @ApiResponse({
-    status: 200,
-  })
-  @ApiResponse({
-    status: 401,
-    description: 'Unauthorized',
-  })
-  async getMe(@Request() req): Promise<User> {
-    return req.user;
-  }
 
   @Post('register')
   @ApiBody({

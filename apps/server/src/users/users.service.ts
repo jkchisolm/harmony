@@ -18,4 +18,8 @@ export class UsersService {
   async users(): Promise<User[]> {
     return this.prisma.user.findMany();
   }
+
+  async findUserServers(id: number) {
+    return this.prisma.user.findUnique({ where: { id } }).servers();
+  }
 }
