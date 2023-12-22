@@ -20,7 +20,7 @@ export const LoginForm = () => {
     email: string,
     password: string
   ): Promise<{ displayName: string; username: string }> => {
-    const response = await fetch('http://localhost:3000/api/auth/login', {
+    const response = await fetch('http://localhost:3000/auth/login', {
       method: 'POST',
       body: JSON.stringify({ email, password }),
       headers: {
@@ -31,10 +31,12 @@ export const LoginForm = () => {
 
     if (response.status === 401) {
       methods.setError('password', { message: 'Incorrect password.' });
+      throw new Error('Incorrect password.');
     } else if (response.status === 404) {
       methods.setError('email', {
         message: 'There is no user with that email.',
       });
+      throw new Error('There is no user with that email.');
     }
 
     return response.json();

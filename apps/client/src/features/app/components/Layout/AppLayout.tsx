@@ -65,7 +65,7 @@ const dummyChannels = [
 ];
 
 const getServers = async () => {
-  const response = await fetch('http://localhost:3000/servers/user/3', {
+  const response = await fetch('http://localhost:3000/users/@me/servers', {
     method: 'GET',
     credentials: 'include',
   });

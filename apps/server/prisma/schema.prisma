@@ -10,6 +10,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// User model
 model User {
   id                     Int       @id @default(autoincrement())
   email                  String    @unique
@@ -25,6 +26,7 @@ model User {
   ownedServers                 Server[]
 }
 
+// Server model
 model Server {
   id          Int      @id @default(autoincrement())
   name        String
@@ -34,4 +36,16 @@ model Server {
   owner       User     @relation(fields: [ownerId], references: [id])
   ownerId     Int
   users       User[]   @relation("ServerUsers")
+  channels    Channel[]
+}
+
+// Channel for a server
+model Channel {
+  id Int @id @default(autoincrement())
+  name String
+  description String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  server Server @relation(fields: [serverId], references: [id])
+  serverId Int
 }

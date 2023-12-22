@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { User } from './User.entity';
+import { Channel } from './Channel.entity';
 
 export class Server {
   // id Int @default(autoincrement()) @id
@@ -29,4 +30,7 @@ export class Server {
 
   @ApiProperty()
   users: User[];
+
+  @ApiProperty()
+  channels: Channel[];
 }
