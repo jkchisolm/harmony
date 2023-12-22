@@ -19,10 +19,13 @@ async function bootstrap() {
     .setTitle('Harmony')
     .setDescription('The Harmony API Description')
     .setVersion('0.1')
+    .setBasePath('api')
     .build();
-  const document = SwaggerModule.createDocument(app, config);
+  const document = SwaggerModule.createDocument(app, config, {
+    ignoreGlobalPrefix: true,
+  });
   SwaggerModule.setup('api/docs', app, document);
-  const globalPrefix = 'api';
+  const globalPrefix = '';
   app.setGlobalPrefix(globalPrefix);
   const port = process.env.PORT || 3000;
   await app.listen(port);

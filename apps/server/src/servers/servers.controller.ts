@@ -1,25 +1,77 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  UseGuards,
+  Request,
+  InternalServerErrorException,
+} from '@nestjs/common';
 import { ServersService } from './servers.service';
 import { CreateServerDto } from './dto/create-server.dto';
 import { UpdateServerDto } from './dto/update-server.dto';
+import { ApiBody, ApiResponse } from '@nestjs/swagger';
+import { GetUserServersDto } from './dto/get-user-server.dto';
+import { GetServerDto } from './dto/get-server.dto';
+import { AuthGuard } from '../auth/auth.guard';
 
 @Controller('servers')
 export class ServersController {
   constructor(private readonly serversService: ServersService) {}
 
-  @Post()
-  create(@Body() createServerDto: CreateServerDto) {
-    return this.serversService.create(createServerDto);
+  @UseGuards(AuthGuard)
+  @Post('create')
+  @ApiBody({
+    type: CreateServerDto,
+    description: 'Create a new server',
+  })
+  async createServer(@Request() req, @Body() createServerDto: CreateServerDto) {
+    const result = await this.serversService.createServer(
+      req.user,
+      createServerDto
+    );
+    if (result == false) {
+      throw new InternalServerErrorException('Something went wrong');
+    }
+    return result;
   }
 
   @Get()
-  findAll() {
-    return this.serversService.findAll();
+  async findAll() {
+    return await this.serversService.findAll();
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.serversService.findOne(+id);
+  }
+
+  /**
+   * Get all servers for a user
+   * @param id
+   * @returns GetServerDto[]
+   */
+  @Get('user/:id')
+  @ApiResponse({
+    type: [GetUserServersDto],
+  })
+  findAllForUser(@Param('id') id: string): Promise<GetUserServersDto[]> {
+    return this.serversService.findAllForUser(+id);
+  }
+
+  // Join a server
+  @Post('join/?serverId=:serverId&userId=:userId')
+  @ApiResponse({
+    type: Boolean,
+  })
+  async joinServer(
+    @Param('serverId') serverId: string,
+    @Param('userId') userId: string
+  ): Promise<GetServerDto | boolean> {
+    return await this.serversService.joinServer(+serverId, +userId);
   }
 
   @Patch(':id')
