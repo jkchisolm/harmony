@@ -63,6 +63,10 @@
 
   color: $app-green;
 
+  .createName {
+    @extend .serverName;
+  }
+
   &:hover {
     background-color: $app-green;
     color: white;

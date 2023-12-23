@@ -24,7 +24,7 @@ export class ServersController {
   constructor(private readonly serversService: ServersService) {}
 
   @UseGuards(AuthGuard)
-  @Post('create')
+  @Post()
   @ApiBody({
     type: CreateServerDto,
     description: 'Create a new server',
