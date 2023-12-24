@@ -15,7 +15,7 @@ export const CreateServerModal = ({ enabled, onClose }: Props) => {
       >
         <h1 className={styles['modal-header']}>Create a server</h1>
         <div className={styles['modal-content']}>
-          <CreateServerForm />
+          <CreateServerForm closeModal={onClose} />
         </div>
       </div>
     </div>

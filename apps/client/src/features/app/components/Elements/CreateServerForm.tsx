@@ -3,7 +3,7 @@ import styles from './CreateServerModal.module.scss';
 import { FieldValues, FormProvider, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Input } from '../../../../components';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 const schema = z.object({
   name: z
@@ -13,11 +13,17 @@ const schema = z.object({
   description: z.string().nullable(),
 });
 
-export const CreateServerForm = () => {
+type Props = {
+  closeModal: () => void;
+};
+
+export const CreateServerForm = (props: Props) => {
   const methods = useForm({
     resolver: zodResolver(schema),
     defaultValues: { name: '', description: '' },
   });
+
+  const queryClient = useQueryClient();
 
   const handleCreateServer = async (name: string, description: string) => {
     const response = await fetch('http://localhost:3000/servers', {
@@ -42,6 +48,8 @@ export const CreateServerForm = () => {
     },
     onSuccess: async () => {
       console.log('Server created!');
+      await queryClient.refetchQueries({ queryKey: ['getUserServers'] });
+      props.closeModal();
     },
   });
 

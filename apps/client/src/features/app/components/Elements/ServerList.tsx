@@ -18,7 +18,12 @@ export const ServerList = ({ servers }: Props) => {
       <MessagesIcon />
       {servers.map((server) => {
         return (
-          <ServerIcon serverName={server.name} serverIcon={server.name[0]} />
+          <ServerIcon
+            key={server.id}
+            serverId={server.id}
+            serverName={server.name}
+            serverIcon={server.name[0]}
+          />
         );
       })}
       <CreateServerButton />

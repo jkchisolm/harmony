@@ -1,19 +1,21 @@
 import styles from './ServerIcon.module.scss';
 
 type Props = {
+  serverId: number;
   serverName: string;
   serverIcon?: string;
 };
 
-export const ServerIcon = ({
-  serverName: channelName,
-  serverIcon: channelIcon,
-}: Props) => {
+export const ServerIcon = ({ serverId, serverName, serverIcon }: Props) => {
+  const handleClick = () => {
+    window.location.href = `/channels/${serverId}`;
+  };
+
   return (
-    <div className={styles.channelIcon}>
-      {channelIcon}
+    <div className={styles.channelIcon} onClick={handleClick}>
+      {serverIcon}
       <div className={styles.serverName}>
-        <span>{channelName}</span>
+        <span>{serverName}</span>
       </div>
     </div>
   );
