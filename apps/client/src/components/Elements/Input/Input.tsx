@@ -10,6 +10,7 @@ type Props = {
   placeholder?: string;
   required?: boolean;
   error?: FieldError;
+  otherProps?: React.InputHTMLAttributes<HTMLInputElement>;
 };
 
 export const Input = (props: Props) => {

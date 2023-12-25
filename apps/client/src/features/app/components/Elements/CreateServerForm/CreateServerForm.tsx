@@ -2,10 +2,12 @@ import * as z from 'zod';
 import styles from './CreateServerModal.module.scss';
 import { FieldValues, FormProvider, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Button, Input } from '../../../../components';
+import { Button, Input } from '../../../../../components';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { UploadImageButton } from './UploadImageButton';
 
 const schema = z.object({
+  image: z.string().nullable(),
   name: z
     .string()
     .min(3, 'Server name must be at least three characters.')
@@ -48,8 +50,8 @@ export const CreateServerForm = (props: Props) => {
     },
     onSuccess: async () => {
       console.log('Server created!');
-      await queryClient.refetchQueries({ queryKey: ['getUserServers'] });
       props.closeModal();
+      await queryClient.refetchQueries({ queryKey: ['getUserServers'] });
     },
   });
 
@@ -57,10 +59,14 @@ export const CreateServerForm = (props: Props) => {
     await createServer(data);
   };
 
+  const handleUpload = (e: any) => {
+    console.log(e);
+  };
+
   return (
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit(handleFormSubmit)}>
-        <h2>Picture Upload (coming soon)</h2>
+        <UploadImageButton handleUpload={handleUpload} />
         <div>
           <Input
             name={'name'}

@@ -1,4 +1,4 @@
-import { CreateServerForm } from './CreateServerForm';
+import { CreateServerForm } from './CreateServerForm/CreateServerForm';
 import styles from './CreateServerModal.module.scss';
 
 type Props = {
